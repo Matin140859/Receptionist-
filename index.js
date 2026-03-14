@@ -28,11 +28,11 @@ app.post("/voice", async (req, res) => {
       conversations[callSid].push({ role: "assistant", content: replyText });
     }
     res.type("text/xml");
-    res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Daniel" language="de-DE">' + replyText + '</Say><Gather input="speech" timeout="15" speechTimeout="2" language="de-DE" action="/voice" method="POST"><Say voice="Polly.Daniel"> </Say></Gather><Redirect>/voice</Redirect></Response>');
+    res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Daniel" language="de-DE">' + replyText + '</Say><Gather input="speech" timeout="15" speechTimeout="2" language="de-DE" action="/voice" method="POST"><Say voice="Polly.Vicki"> </Say></Gather><Redirect>/voice</Redirect></Response>');
   } catch (err) {
     console.error("Voice error:", err.message);
     res.type("text/xml");
-    res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Daniel" language="de-DE">Es tut mir leid, ein Fehler ist aufgetreten. Bitte rufen Sie spaeter an.</Say></Response>');
+    res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Vicki" language="de-DE">Es tut mir leid, ein Fehler ist aufgetreten. Bitte rufen Sie spaeter an.</Say></Response>');
   }
 });
 
