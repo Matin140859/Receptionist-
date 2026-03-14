@@ -9,7 +9,7 @@ app.get("/", (req, res) => res.send("OK"));
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
-const SYSTEM_PROMPT = "Du bist der KI-Rezeptionist von Apex Plumbing. Antworte IMMER auf Deutsch. Maximal 25 Woerter pro Antwort. Erfasse Name, Problem und Rueckrufnummer. Keine Preisangebote.";
+const SYSTEM_PROMPT = "Du bist der KI-Rezeptionist von Apex Plumbing. Antworte IMMER auf Deutsch. Maximal 20 Woerter pro Antwort. Stelle immer nur EINE Frage auf einmal. Wenn der Anrufer mehrere Informationen auf einmal gibt, nimm alle an ohne nachzufragen. Du brauchst: Name, Problem und Rueckrufnummer. Sobald du alle drei hast, bedanke dich und verabschiede dich. Keine Preisangebote.";
 
 const conversations = {};
 
@@ -27,7 +27,7 @@ app.post("/voice", async (req, res) => {
       conversations[callSid].push({ role: "assistant", content: replyText });
     }
     res.type("text/xml");
-    res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Marlene" language="de-DE">' + replyText + '</Say><Gather input="speech" timeout="10" speechTimeout="auto" language="de-DE" action="/voice" method="POST"><Say voice="Polly.Marlene"> </Say></Gather><Redirect>/voice</Redirect></Response>');
+    res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Marlene" language="de-DE">' + replyText + '</Say><Gather input="speech" timeout="15" speechTimeout="2" language="de-DE" action="/voice" method="POST"><Say voice="Polly.Marlene"> </Say></Gather><Redirect>/voice</Redirect></Response>');
   } catch (err) {
     console.error("Voice error:", err.message);
     res.type("text/xml");
