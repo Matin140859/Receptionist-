@@ -19,7 +19,7 @@ app.post("/voice", async (req, res) => {
     if (!conversations[callSid]) conversations[callSid] = [];
     const userSpeech = req.body.SpeechResult;
     if (!userSpeech) await new Promise(resolve => setTimeout(resolve, 2000));
-    let replyText = "Willkommen bei Apex Plumbing! Ich bin Ihr KI-Assistent. Bitte nennen Sie mir jetzt Ihren Namen, Ihr Grund liegendes Anliegen und Ihre Rueckrufnummer.";
+    let replyText = "Willkommen bei Apex Plumbing! Ich bin Ihr persönlicher KI-Assistent. Bitte nennen Sie mir jetzt Ihren Namen, Ihr Grund liegendes Anliegen und Ihre Rueckrufnummer.";
     if (userSpeech) {
       conversations[callSid].push({ role: "user", content: userSpeech });
       const response = await client.messages.create({ model: "claude-sonnet-4-20250514", max_tokens: 150, system: SYSTEM_PROMPT, messages: conversations[callSid] });
@@ -32,7 +32,7 @@ app.post("/voice", async (req, res) => {
   } catch (err) {
     console.error("Voice error:", err.message);
     res.type("text/xml");
-    res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Marlene" language="de-DE">Es tut mir leid, ein Fehler ist aufgetreten. Bitte rufen Sie spaeter an.</Say></Response>');
+    res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Vicki" language="de-DE">Es tut mir leid, ein Fehler ist aufgetreten. Bitte rufen Sie spaeter an.</Say></Response>');
   }
 });
 
