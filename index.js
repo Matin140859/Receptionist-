@@ -14,7 +14,7 @@ app.post("/voice", async (req, res) => {
   const callSid = req.body.CallSid;
   if (!conversations[callSid]) conversations[callSid] = [];
   const userSpeech = req.body.SpeechResult;
-  let replyText = "Thanks for calling Apex Plumbing! How can I help you today?";
+  let replyText = "Willkommen bei Apex Plumbing! Wie kann ich Ihnen helfen?";";
   if (userSpeech) {
     conversations[callSid].push({ role: "user", content: userSpeech });
     const response = await client.messages.create({ model: "claude-sonnet-4-20250514", max_tokens: 150, system: SYSTEM_PROMPT, messages: conversations[callSid] });
