@@ -68,7 +68,7 @@ app.post("/voice", async (req, res) => {
     }
     const audio = await textToSpeech(replyText);
     audioCache[callSid] = audio;
-    const host = req.headers.host;
+    const host = "receptionist-suce.onrender.com";
     res.type("text/xml");
     res.send(`<?xml version="1.0" encoding="UTF-8"?><Response><Play>https://${host}/audio/${callSid}</Play><Gather input="speech" timeout="15" speechTimeout="2" language="de-DE" action="/voice" method="POST"><Say> </Say></Gather><Redirect>/voice</Redirect></Response>`);
   } catch (err) {
