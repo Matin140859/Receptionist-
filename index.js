@@ -22,7 +22,7 @@ app.post("/voice", async (req, res) => {
     conversations[callSid].push({ role: "assistant", content: replyText });
   }
   res.type("text/xml");
-  res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Amy">' + replyText + '</Say><Gather input="speech" timeout="5" action="/voice" method="POST"><Say voice="Polly.Amy"> </Say></Gather></Response>');
+  res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Marlene">' + replyText + '</Say><Gather input="speech" timeout="5" action="/voice" method="POST"><Say voice="Polly.Marlene"> </Say></Gather></Response>');
 });
 
 app.listen(process.env.PORT || 3000, "0.0.0.0", () => console.log("Server running"));
