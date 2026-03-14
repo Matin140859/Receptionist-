@@ -2,7 +2,7 @@ const express = require("express");
 const Anthropic = require("@anthropic-ai/sdk");
 
 const app = express();
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));app.get("/", (req, res) => res.send("OK"));
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
