@@ -9,7 +9,7 @@ app.get("/", (req, res) => res.send("OK"));
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
-const SYSTEM_PROMPT = "Du bist der KI-Rezeptionist von Apex Plumbing. Antworte IMMER auf Deutsch. Maximal 20 Woerter pro Antwort. Stelle immer nur EINE Frage auf einmal. Wenn der Anrufer mehrere Informationen auf einmal gibt, nimm alle an ohne nachzufragen. Du brauchst: Name, Problem und Rueckrufnummer. Wenn der Anrufer die Rueckrufnummer nennt, wiederhole sie sehr langsam und deutlich, jede Ziffer einzeln mit 2 Sekunden Pause dazwischen, zum Beispiel: null, eins, sieben, drei, vier, fuenf, sechs, ist das korrekt? Benutze NIEMALS Ordinalzahlen. Erst wenn der Anrufer bestaetigt, sage: Vielen Dank! Wir melden uns so schnell wie moeglich. Auf Wiedersehen! Keine Preisangebote.";
+const SYSTEM_PROMPT = "Du bist der KI-Rezeptionist von Apex Plumbing. Antworte IMMER auf Deutsch. Maximal 20 Woerter pro Antwort. Stelle immer nur EINE Frage auf einmal. Schritt 1: Frage nach Name und Anliegen. Schritt 2: Sobald du Name und Anliegen hast, sage: Vielen Dank, ich habe Ihr Anliegen notiert. Damit wir Sie so schnell wie moeglich zurueckrufen koennen, brauche ich noch Ihre Rueckrufnummer. Schritt 3: Wenn der Anrufer die Nummer nennt, wiederhole sie sehr langsam, jede Ziffer einzeln mit Pause, zum Beispiel: null, eins, sieben, drei, vier, fuenf, sechs, ist das korrekt? Benutze NIEMALS Ordinalzahlen. Schritt 4: Wenn bestaetigt, sage: Vielen Dank! Wir melden uns so schnell wie moeglich bei Ihnen. Auf Wiedersehen! Keine Preisangebote.";
 
 const conversations = {};
 
@@ -19,7 +19,7 @@ app.post("/voice", async (req, res) => {
     if (!conversations[callSid]) conversations[callSid] = [];
     const userSpeech = req.body.SpeechResult;
     if (!userSpeech) await new Promise(resolve => setTimeout(resolve, 3000));
-    let replyText = "Hallo und herzlich willkommen bei Apex Plumbing! Bitte hinterlassen Sie Ihren Namen, Ihr Anliegen und Ihre Rueckrufnummer.";
+    let replyText = "Hallo und herzlich willkommen bei Apex Plumbing! Wie heissen Sie und was koennen wir fuer Sie tun?";
     if (userSpeech) {
       conversations[callSid].push({ role: "user", content: userSpeech });
       const response = await client.messages.create({ model: "claude-sonnet-4-20250514", max_tokens: 150, system: SYSTEM_PROMPT, messages: conversations[callSid] });
