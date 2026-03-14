@@ -24,6 +24,6 @@ app.post("/voice", async (req, res) => {
   }
   res.type("text/xml");
   res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Marlene">' + replyText + '</Say><Gather input="speech" timeout="10" speechTimeout="auto" action="/voice" method="POST"><Say voice="Polly.Marlene"> </Say></Gather><Redirect>/voice</Redirect></Response>');
-
+});
 
 app.listen(process.env.PORT || 3000, "0.0.0.0", () => console.log("Server running"));
