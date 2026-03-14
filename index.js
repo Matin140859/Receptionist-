@@ -2,11 +2,12 @@ const express = require("express");
 const Anthropic = require("@anthropic-ai/sdk");
 
 const app = express();
-app.use(express.urlencoded({ extended: true }));app.get("/", (req, res) => res.send("OK"));
+app.use(express.urlencoded({ extended: true }));
+app.get("/", (req, res) => res.send("OK"));
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-const SYSTEM_PROMPT = "Antworte immer auf Deutsch" = "Du bist der freundliche KI-Rezeptionist von Apex Plumbing. Antworte IMMER auf Deutsch, niemals auf Englisch. Halte Antworten kurz unter 30 Wörter. Erfasse den Namen, das Problem und weitere details und die Rückrufnummer des Anrufers. Gib niemals Preisangebote.";.";
+const SYSTEM_PROMPT = "Du bist der freundliche KI-Rezeptionist von Apex Plumbing. Antworte IMMER auf Deutsch. Halte Antworten kurz unter 30 Woerter. Erfasse den Namen, das Problem und die Rueckrufnummer des Anrufers. Gib niemals Preisangebote.";
 
 const conversations = {};
 
