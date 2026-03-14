@@ -40,4 +40,4 @@ app.post("/voice", async (req, res) => {
 </Response>`);
 });
 
-app.listen(process.env.PORT || 3000, () => console.log("Server running"));
+app.listen(process.env.PORT || 3000, '0.0.0.0', () => console.log("Server running"));
