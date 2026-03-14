@@ -72,7 +72,7 @@ app.post("/voice", async (req, res) => {
     res.type("text/xml");
     res.send(`<?xml version="1.0" encoding="UTF-8"?><Response><Play>https://${host}/audio/${callSid}</Play><Gather input="speech" timeout="15" speechTimeout="2" language="de-DE" action="/voice" method="POST"><Say> </Say></Gather><Redirect>/voice</Redirect></Response>`);
   } catch (err) {
-    console.error("Voice error:", err.message);
+    console.error("Voice error:", err.message, err.stack);
     res.type("text/xml");
     res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say language="de-DE">Es tut mir leid, ein Fehler ist aufgetreten. Bitte rufen Sie spaeter an.</Say></Response>');
   }
