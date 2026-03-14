@@ -36,6 +36,7 @@ app.post("/voice", async (req, res) => {
 });
 
 app.post("/status", async (req, res) => {
+  console.log("Status called:", req.body.CallStatus, req.body.CallSid);
   try {
     const callSid = req.body.CallSid;
     const callStatus = req.body.CallStatus;
