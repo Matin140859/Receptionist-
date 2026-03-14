@@ -6,7 +6,7 @@ app.use(express.urlencoded({ extended: true }));app.get("/", (req, res) => res.s
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-const SYSTEM_PROMPT = "You are the friendly AI receptionist for Apex Plumbing. Keep replies short under 30 words. This is a phone call. Get the callers name, problem and callback number. Never give price quotes.";
+const SYSTEM_PROMPT = "Antworte immer auf Deutsch.You are the friendly AI receptionist for Apex Plumbing. Keep replies short under 30 words. This is a phone call. Get the callers name, problem and callback number. Never give price quotes.";
 
 const conversations = {};
 
