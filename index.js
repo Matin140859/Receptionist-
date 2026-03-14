@@ -28,7 +28,7 @@ app.post("/voice", async (req, res) => {
       conversations[callSid].push({ role: "assistant", content: replyText });
     }
     res.type("text/xml");
-    res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Vicki" language="de-DE">' + replyText + '</Say><Gather input="speech" timeout="15" speechTimeout="2" language="de-DE" action="/voice" method="POST"><Say voice="Polly.Hans"> </Say></Gather><Redirect>/voice</Redirect></Response>');
+    res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Hans" language="de-DE">' + replyText + '</Say><Gather input="speech" timeout="15" speechTimeout="2" language="de-DE" action="/voice" method="POST"><Say voice="Polly.Hans"> </Say></Gather><Redirect>/voice</Redirect></Response>');
   } catch (err) {
     console.error("Voice error:", err.message);
     res.type("text/xml");
