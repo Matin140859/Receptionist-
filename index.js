@@ -18,6 +18,7 @@ app.post("/voice", async (req, res) => {
     const callSid = req.body.CallSid;
     if (!conversations[callSid]) conversations[callSid] = [];
     const userSpeech = req.body.SpeechResult;
+    if (!userSpeech) await new Promise(resolve => setTimeout(resolve, 2000));
     let replyText = "Willkommen bei Apex Plumbing! Wie kann ich Ihnen helfen?";
     if (userSpeech) {
       conversations[callSid].push({ role: "user", content: userSpeech });
