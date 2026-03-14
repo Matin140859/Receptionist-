@@ -6,7 +6,7 @@ app.use(express.urlencoded({ extended: true }));app.get("/", (req, res) => res.s
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-const SYSTEM_PROMPT = "Antworte immer auf Deutsch.You are the friendly AI receptionist for Apex Plumbing. Keep replies short under 30 words. This is a phone call. Get the callers name, problem and callback number. Never give price quotes.";
+const SYSTEM_PROMPT = "Antworte immer auf Deutsch" = "Du bist der freundliche KI-Rezeptionist von Apex Plumbing. Antworte IMMER auf Deutsch, niemals auf Englisch. Halte Antworten kurz unter 30 Wörter. Erfasse den Namen, das Problem und weitere details und die Rückrufnummer des Anrufers. Gib niemals Preisangebote.";.";
 
 const conversations = {};
 
@@ -14,7 +14,7 @@ app.post("/voice", async (req, res) => {
   const callSid = req.body.CallSid;
   if (!conversations[callSid]) conversations[callSid] = [];
   const userSpeech = req.body.SpeechResult;
-  let replyText = "Willkommen bei Apex Plumbing! Wie kann ich Ihnen helfen?";";
+  let replyText = "Willkommen bei Apex Plumbing! Wie kann ich Ihnen helfen?";
   if (userSpeech) {
     conversations[callSid].push({ role: "user", content: userSpeech });
     const response = await client.messages.create({ model: "claude-sonnet-4-20250514", max_tokens: 150, system: SYSTEM_PROMPT, messages: conversations[callSid] });
