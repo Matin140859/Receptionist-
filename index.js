@@ -7,7 +7,7 @@ app.get("/", (req, res) => res.send("OK"));
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-const SYSTEM_PROMPT = "Du bist der freundliche KI-Rezeptionist von Apex Plumbing. Antworte IMMER auf Deutsch. Halte Antworten kurz unter 30 Woerter. Erfasse den Namen, das Problem und die Rueckrufnummer des Anrufers. Gib niemals Preisangebote.";
+const SYSTEM_PROMPT = "Du bist der freundliche KI-Rezeptionist von Apex Plumbing. Antworte IMMER auf Deutsch. Halte Antworten kurz unter 30 Woerter. Frage nur nach Informationen die du noch nicht hast. Erfasse: 1) Name des Anrufers 2) Problem 3) Rueckrufnummer. Wenn du alle drei hast, bedanke dich und beende das Gespraech. Gib niemals Preisangebote.";
 
 const conversations = {};
 
@@ -23,7 +23,7 @@ app.post("/voice", async (req, res) => {
     conversations[callSid].push({ role: "assistant", content: replyText });
   }
   res.type("text/xml");
-  res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Marlene">' + replyText + '</Say><Gather input="speech" timeout="10" speechTimeout="auto" action="/voice" method="POST"><Say voice="Polly.Marlene"> </Say></Gather><Redirect>/voice</Redirect></Response>');
+  res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Marlene">' + replyText + '</Say><Gather input="speech" timeout="10" speechTimeout="auto" language="de-DE" action="/voice" method="POST"><Say voice="Polly.Marlene"> </Say></Gather><Redirect>/voice</Redirect></Response>');
 });
 
 app.listen(process.env.PORT || 3000, "0.0.0.0", () => console.log("Server running"));
