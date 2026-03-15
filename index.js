@@ -1,6 +1,7 @@
 const express = require("express");
 const Anthropic = require("@anthropic-ai/sdk");
 const twilio = require("twilio");
+const https = require("https");
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -11,11 +12,11 @@ const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_A
 
 const BUSINESSES = {
   "+12763294723": {
-    name: "Mustermann Sanitär",
+    name: "Mustermann Sanitaer",
     ownerPhone: process.env.OWNER_PHONE,
     twilioNumber: "+12763294723",
-    greeting: "Hallo und herzlich willkommen bei Mustermann Sanitär! Ich bin Ihr persoenlicher KI-Assistent. Wie heissen Sie und wie darf ich Ihnen helfen?",
-    prompt: "Du bist der KI-Rezeptionist von Mustermann Sanitär."
+    greeting: "Hallo und herzlich willkommen bei Mustermann Sanitaer! Ich bin Ihr persoenlicher KI-Assistent. Wie heissen Sie und wie darf ich Ihnen helfen?",
+    prompt: "Du bist der KI-Rezeptionist von Mustermann Sanitaer."
   }
 };
 
@@ -65,5 +66,9 @@ app.post("/status", async (req, res) => {
   }
   res.sendStatus(200);
 });
+
+setInterval(() => {
+  https.get("https://receptionist-suce.onrender.com/");
+}, 5 * 60 * 1000);
 
 app.listen(process.env.PORT || 3000, "0.0.0.0", () => console.log("Server running"));
