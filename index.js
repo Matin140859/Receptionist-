@@ -19,7 +19,7 @@ app.post("/voice", async (req, res) => {
     if (!conversations[callSid]) conversations[callSid] = [];
     const userSpeech = req.body.SpeechResult;
     if (!userSpeech) await new Promise(resolve => setTimeout(resolve, 3000));
-    let replyText = "Hallo und herzlich willkommen bei Apex Plumbing! Wie heissen Sie und was koennen wir fuer Sie tun?";
+    let replyText ="Hallo und herzlich willkommen bei Apex Plumbing! Ich bin Ihr persoenlicher KI-Assistent. Bitte teilen Sie mir Ihren Namen mit und sagen Sie mir, wie ich Ihnen helfen kann";
     if (userSpeech) {
       conversations[callSid].push({ role: "user", content: userSpeech });
       const response = await client.messages.create({ model: "claude-sonnet-4-20250514", max_tokens: 150, system: SYSTEM_PROMPT, messages: conversations[callSid] });
