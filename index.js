@@ -11,11 +11,11 @@ const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_A
 
 const BUSINESSES = {
   "+12763294723": {
-    name: "Apex Plumbing",
+    name: "Mustermann Sanitär",
     ownerPhone: process.env.OWNER_PHONE,
     twilioNumber: "+12763294723",
-    greeting: "Hallo und herzlich willkommen bei Apex Plumbing! Ich bin Ihr persoenlicher KI-Assistent. Wie heissen Sie und wie darf ich Ihnen helfen?",
-    prompt: "Du bist der KI-Rezeptionist von Apex Plumbing."
+    greeting: "Hallo und herzlich willkommen bei Mustermann Sanitär! Ich bin Ihr persoenlicher KI-Assistent. Wie heissen Sie und wie darf ich Ihnen helfen?",
+    prompt: "Du bist der KI-Rezeptionist von Mustermann Sanitär."
   }
 };
 
