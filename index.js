@@ -12,15 +12,15 @@ const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_A
 
 const BUSINESSES = {
   "+12763294723": {
-    name: "Facility Fix 24",
+    name: "Mustermann Sanitär",
     ownerPhone: "+4915731311709",
     twilioNumber: "+12763294723",
-    greeting: "Hallo und herzlich willkommen bei Facility Fix 24, Ihrem Klempner-Notdienst in Berlin! Ich bin Ihr persoenlicher KI-Assistent. Wie heissen Sie und wie darf ich Ihnen helfen?",
-    prompt: "Du bist der KI-Rezeptionist von Facility Fix 24, einem professionellen Klempner-Betrieb in Berlin."
+    greeting: "Hallo und herzlich willkommen bei Mustermann Sanitär, Ihrem Klempner-Notdienst in Berlin! Ich bin Ihr persoenlicher KI-Assistent. Wie heissen Sie und wie darf ich Ihnen helfen?",
+    prompt: "Du bist der KI-Rezeptionist von Mustermann Sanitär, einem professionellen Klempner-Betrieb in Berlin."
   }
 };
 
-const BASE_PROMPT = " Antworte IMMER auf Deutsch. Maximal 20 Woerter pro Antwort. Stelle immer nur EINE Frage auf einmal. Schritt 1: Frage nach Name und Anliegen. Schritt 2: Sobald du Name und Anliegen hast, sage: Vielen Dank, ich habe Ihr Anliegen notiert. Damit wir Sie so schnell wie moeglich zurueckrufen koennen, brauche ich noch Ihre Rueckrufnummer. Schritt 3: Hoere der Nummer SEHR genau zu. Wiederhole JEDE einzelne Ziffer langsam und deutlich mit Pause dazwischen. Benutze NIEMALS Ordinalzahlen. Wenn der Anrufer eine Korrektur macht, wiederhole die gesamte Nummer nochmal. Schritt 4: Erst wenn bestaetigt, sage: Vielen Dank! Wir melden uns so schnell wie moeglich. Auf Wiedersehen! Keine Preisangebote.";
+const BASE_PROMPT = " Antworte IMMER auf Deutsch. Maximal 20 Woerter pro Antwort. Stelle immer nur EINE Frage auf einmal. Schritt 1: Frage nach Name und Anliegen. Schritt 2: Sobald du Name und Anliegen hast, sage: Vielen Dank, ich habe Ihr Anliegen notiert. Damit wir Sie so schnell wie moeglich zurueckrufen koennen, brauche ich noch Ihre Rueckrufnummer. Schritt 3: Hoere der Nummer SEHR genau zu bis zum ENDE. Wiederhole JEDE einzelne Ziffer langsam und deutlich mit Pause dazwischen. Benutze NIEMALS Ordinalzahlen. Wenn der Anrufer eine Korrektur macht, wiederhole die gesamte Nummer nochmal. Schritt 4: Erst wenn bestaetigt, sage: Vielen Dank! Das Team von Mustermann Sanitär meldet sich schnellstmoeglich. Bis bald! Keine Preisangebote.";
 
 const conversations = {};
 
